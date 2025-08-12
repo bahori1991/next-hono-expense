@@ -1,0 +1,41 @@
+{
+  "name": "bun-devcontainer-template",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "VARIANT": "latest"
+    }
+  },
+  "remoteUser": "appuser",
+  "workspaceFolder": "/home/appuser/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/appuser/workspace,type=bind",
+  "mounts": [
+    "source=${localEnv:HOME}/.bashrc,target=/home/appuser/.bashrc,type=bind,readonly=true",
+    "source=${localEnv:HOME}/.ssh,target=/home/appuser/.ssh,type=bind,readonly=true"
+  ],
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "streetsidesoftware.code-spell-checker",
+        "christian-kohler.npm-intellisense",
+        "christian-kohler.path-intellisense",
+        "bradlc.vscode-tailwindcss",
+        "mhutchie.git-graph",
+        "eamodio.gitlens",
+        "biomejs.biome",
+        "humao.rest-client"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "security.workspace.trust.enabled": true
+      }
+    }
+  },
+  "postCreateCommand": "echo 'Dev container created successfully!'",
+  "postStartCommand": "echo 'Dev container started successfully!'"
+}

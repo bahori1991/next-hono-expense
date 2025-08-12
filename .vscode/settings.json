@@ -1,0 +1,21 @@
+{
+  "files.exclude": {
+    "**/node_modules": true,
+  },
+  "cSpell.words": [
+    "appuser",
+    "bradlc",
+    "devcontainers",
+    "eamodio",
+    "humao",
+    "kohler",
+    "libsql",
+    "localtime",
+    "mhutchie",
+    "turbopack",
+    "turso",
+    "userdel",
+    "vercel",
+    "zoneinfo"
+  ]
+}
