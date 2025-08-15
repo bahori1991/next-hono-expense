@@ -2,7 +2,7 @@
 
 import { parseWithZod } from "@conform-to/zod/v4";
 import { redirect } from "next/navigation";
-import { createExpenseSchema } from "@/features/expenses/(shared)/schemas/expenseSchema";
+import { createExpenseSchema } from "@/lib/db/schemas/expenses";
 import { createHonoClient } from "@/lib/honoClient";
 
 export async function createExpenseAction(_: unknown, formData: FormData) {

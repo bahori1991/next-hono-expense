@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
-import { authRoutes } from "@/server/routes/auth";
-import { expensesRoute } from "@/server/routes/expenses";
+import { authRoutes } from "@/app/api/routes/auth";
+import { expensesRoute } from "@/app/api/routes/expenses";
 
 const app = new Hono().basePath("/api");
 const route = app.route("/auth", authRoutes).route("/expenses", expensesRoute);

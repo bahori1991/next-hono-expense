@@ -3,7 +3,7 @@
 import { parseWithZod } from "@conform-to/zod/v4";
 import { redirect } from "next/navigation";
 import { registerSchema } from "@/features/auth/register/schemas/registerSchema";
-import { auth } from "@/server/auth";
+import { auth } from "@/lib/auth";
 
 export async function registerAction(_: unknown, formData: FormData) {
   const submission = parseWithZod(formData, { schema: registerSchema });

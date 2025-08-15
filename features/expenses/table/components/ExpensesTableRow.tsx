@@ -1,5 +1,5 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import type { Expense } from "@/features/expenses/(shared)/schemas/expenseSchema";
+import type { Expense } from "@/lib/db/schemas/expenses";
 
 export function ExpensesTableRow({ expense }: { expense: Expense }) {
   return (

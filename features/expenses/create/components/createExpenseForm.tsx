@@ -1,15 +1,38 @@
-import { getFormProps, getInputProps } from "@conform-to/react";
+import { getFormProps, getInputProps, useForm } from "@conform-to/react";
+import { getZodConstraint, parseWithZod } from "@conform-to/zod/v4";
+import { useQueryClient } from "@tanstack/react-query";
+import { useActionState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { UseCreateExpenseType } from "@/features/expenses/create/hooks/useCreateExpense";
+import { createExpenseAction } from "@/features/expenses/create/actions/createExpenseAction";
+import { createExpenseSchema } from "@/lib/db/schemas/expenses";
+import { queryKeys } from "@/lib/queryKeys";
 
-export function CreateExpenseForm({
-  form,
-  fields,
-  action,
-  isPending,
-}: UseCreateExpenseType) {
+export function CreateExpenseForm() {
+  const queryClient = useQueryClient();
+  const [lastResult, action, isPending] = useActionState(
+    createExpenseAction,
+    undefined,
+  );
+
+  const [form, fields] = useForm({
+    lastResult,
+    constraint: getZodConstraint(createExpenseSchema),
+    shouldValidate: "onBlur",
+    shouldRevalidate: "onInput",
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: createExpenseSchema });
+    },
+  });
+
+  useEffect(() => {
+    if (!isPending) {
+      queryClient.invalidateQueries({ queryKey: queryKeys.expenses.lists() });
+      queryClient.invalidateQueries({ queryKey: queryKeys.expenses.total() });
+    }
+  }, [queryClient, isPending]);
+
   return (
     <div className="max-w-sm mx-auto mt-4">
       <form

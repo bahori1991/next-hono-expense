@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { getUser } from "@/app/api/middlewares/getUser";
+import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
-import { auth } from "@/server/auth";
-import { getUser } from "@/server/middlewares/getUser";
 
 export const authRoutes = new Hono()
   .use(

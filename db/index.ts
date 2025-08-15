@@ -1,8 +1,9 @@
 import { drizzle } from "drizzle-orm/libsql";
+import * as authSchema from "@/lib/db/schemas/auth";
+import * as expensesSchema from "@/lib/db/schemas/expenses";
 import { env } from "@/lib/env";
-import * as authSchema from "@/server/db/schemas/auth";
 
-export const schema = { ...authSchema };
+const schema = { ...authSchema, ...expensesSchema };
 
 export const db = drizzle({
   connection: {

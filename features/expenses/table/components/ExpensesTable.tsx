@@ -8,9 +8,15 @@ import {
 } from "@/components/ui/table";
 import { ExpensesTableRow } from "@/features/expenses/table/components/ExpensesTableRow";
 import { ExpensesTableSkeleton } from "@/features/expenses/table/components/ExpensesTableSkeleton";
-import type { ExpensesTableProps } from "@/features/expenses/table/types/expenseTableType";
+import type { Expense } from "@/lib/db/schemas/expenses";
 
-export function ExpensesTable({ expenses, isPending }: ExpensesTableProps) {
+export function ExpensesTable({
+  expenses,
+  isPending,
+}: {
+  expenses: Expense[];
+  isPending: boolean;
+}) {
   return (
     <Table className="max-w-md mx-auto mt-4">
       <TableCaption>A list of all your expenses.</TableCaption>

@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
-import { LoginLink } from "@/features/auth/login/components/LoginLink";
-import { auth } from "@/server/auth";
+import { LinkToLogin } from "@/features/auth/login/components/LinkToLogin";
+import { auth } from "@/lib/auth";
 
 export default async function ProtectedLayout({
   children,
@@ -12,7 +12,7 @@ export default async function ProtectedLayout({
   });
 
   if (!session) {
-    return <LoginLink />;
+    return <LinkToLogin />;
   }
 
   return <>{children}</>;

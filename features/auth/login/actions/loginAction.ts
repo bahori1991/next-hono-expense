@@ -3,7 +3,7 @@
 import { parseWithZod } from "@conform-to/zod/v4";
 import { redirect } from "next/navigation";
 import { loginSchema } from "@/features/auth/login/schemas/loginSchema";
-import { auth } from "@/server/auth";
+import { auth } from "@/lib/auth";
 
 export async function loginAction(_: unknown, formData: FormData) {
   const submission = parseWithZod(formData, { schema: loginSchema });

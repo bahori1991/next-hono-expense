@@ -62,12 +62,12 @@ export const accounts = sqliteTable(
       () => new Date(),
     ),
   },
-  (table) => ({
-    accountProviderUnique: uniqueIndex("account_provider_unique").on(
+  (table) => [
+    uniqueIndex("account_provider_unique").on(
       table.providerId,
       table.accountId,
     ),
-  }),
+  ],
 );
 
 export const verifications = sqliteTable("verifications", {

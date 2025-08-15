@@ -1,16 +1,40 @@
-import { getFormProps, getInputProps } from "@conform-to/react";
+"use client";
+
+import { getFormProps, getInputProps, useForm } from "@conform-to/react";
+import { getZodConstraint, parseWithZod } from "@conform-to/zod/v4";
+import { useQueryClient } from "@tanstack/react-query";
+import { useActionState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { UseUserRegisterType } from "@/features/auth/register/hooks/useUserRegister";
+import { registerAction } from "@/features/auth/register/actions/registerAction";
+import { registerSchema } from "@/features/auth/register/schemas/registerSchema";
+import { queryKeys } from "@/lib/queryKeys";
 
-export function RegisterForm({
-  form,
-  fields,
-  action,
-  isPending,
-}: UseUserRegisterType) {
+export function RegisterForm() {
+  const queryClient = useQueryClient();
+  const [lastResult, action, isPending] = useActionState(
+    registerAction,
+    undefined,
+  );
+
+  const [form, fields] = useForm({
+    lastResult,
+    constraint: getZodConstraint(registerSchema),
+    shouldValidate: "onBlur",
+    shouldRevalidate: "onInput",
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: registerSchema });
+    },
+  });
+
+  useEffect(() => {
+    if (!isPending) {
+      queryClient.invalidateQueries({ queryKey: queryKeys.auth.me() });
+    }
+  }, [isPending, queryClient]);
+
   return (
     <div className="min-h-screen flex items-center justify-center">
       <Card className="max-w-md mx-auto mt-4 shadow-lg w-full">

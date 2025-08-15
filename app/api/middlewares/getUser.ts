@@ -1,13 +1,9 @@
 import { createMiddleware } from "hono/factory";
-import { auth } from "@/server/auth";
+import { auth } from "@/lib/auth";
 
 type Env = {
   Variables: {
-    user: {
-      email: string;
-      name: string;
-      image: string | null | undefined;
-    };
+    user: typeof auth.$Infer.Session.user;
   };
 };
 
@@ -21,13 +17,7 @@ export const getUser = createMiddleware<Env>(async (c, next) => {
       return c.json({ error: "Unauthorized" }, 401);
     }
 
-    const user = {
-      email: session.user.email,
-      name: session.user.name,
-      image: session.user.image,
-    };
-
-    c.set("user", user);
+    c.set("user", session.user);
     return next();
   } catch (error) {
     return c.json({ error: "Internal Server Error", details: error }, 500);

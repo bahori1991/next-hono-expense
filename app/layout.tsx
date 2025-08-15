@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import TanstackProvider from "@/app/tanstackProvider";
+import TanstackProvider from "@/components/providers/TanstackProvider";
 
 export const metadata: Metadata = {
   title: "Expense tracker",
