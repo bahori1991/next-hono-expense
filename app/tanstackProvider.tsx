@@ -14,6 +14,7 @@ export default function TanstackProvider({
         defaultOptions: {
           queries: {
             staleTime: 1000 * 60,
+            retry: false,
           },
         },
       }),

@@ -1,6 +1,6 @@
 import { NavigationBar } from "@/components/navigationBar";
 
-export default function ProtectedLayout({
+export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;

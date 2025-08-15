@@ -16,9 +16,9 @@ export function useCurrentUser() {
 
       if (!res.ok) {
         if (res.status === 401) {
-          return null;
+          throw new Error("401 Unauthorized");
         }
-        throw new Error(`${res.status} Server error`);
+        throw new Error(`500 Internal Server Error`);
       }
 
       const user = await res.json();

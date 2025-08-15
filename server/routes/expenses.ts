@@ -3,6 +3,7 @@ import {
   createExpenseSchema,
   type Expense,
 } from "@/features/expenses/(shared)/schemas/expenseSchema";
+import { getUser } from "@/server/middlewares/getUser";
 
 export const fakeExpenses: Expense[] = [
   { id: 1, title: "Expense 1", amount: 100 },
@@ -11,6 +12,7 @@ export const fakeExpenses: Expense[] = [
 ];
 
 export const expensesRoute = new Hono()
+  .use("*", getUser)
   .get("/", (c) => {
     return c.json({ expenses: fakeExpenses });
   })

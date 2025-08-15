@@ -15,7 +15,10 @@ export function useTotalExpense() {
       const res = await client.api.expenses["total-spent"].$get();
 
       if (!res.ok) {
-        throw new Error(`${res.status} Server error`);
+        if (res.status === 401) {
+          throw new Error("401 Unauthorized");
+        }
+        throw new Error(`500 Internal Server Error`);
       }
 
       const { total } = await res.json();
