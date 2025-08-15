@@ -1,4 +1,4 @@
-import { CreateExpenseContainer } from "@/features/expenses/containers/createExpenseContainer";
+import { CreateExpenseContainer } from "@/features/expenses/create/components/createExpenseContainer";
 
 export default function CreateExpensePage() {
   return (

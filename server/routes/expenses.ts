@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import {
   createExpenseSchema,
   type Expense,
-} from "@/features/expenses/types/expenses";
+} from "@/features/expenses/(shared)/schemas/expenseSchema";
 
 export const fakeExpenses: Expense[] = [
   { id: 1, title: "Expense 1", amount: 100 },
@@ -11,7 +11,9 @@ export const fakeExpenses: Expense[] = [
 ];
 
 export const expensesRoute = new Hono()
-  .get("/", (c) => c.json({ expenses: fakeExpenses }))
+  .get("/", (c) => {
+    return c.json({ expenses: fakeExpenses });
+  })
   .get("/:id{[0-9]+}", (c) => {
     const id = Number.parseInt(c.req.param("id"));
     const expense = fakeExpenses.find((expense) => expense.id === id);

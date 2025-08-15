@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import TanstackProvider from "@/app/tanstackProvider";
 
 export const metadata: Metadata = {
   title: "Expense tracker",
@@ -13,7 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark min-h-screen">
-      <body>{children}</body>
+      <body>
+        <TanstackProvider>
+          {children}
+          <ReactQueryDevtools />
+        </TanstackProvider>
+      </body>
     </html>
   );
 }

@@ -18,8 +18,8 @@ export function NavLink({
     <Link
       className={cn(
         isActive
-          ? "font-bold text-primary"
-          : "text-gray-600 hover:text-primary",
+          ? "font-extrabold text-primary"
+          : "text-gray-500 hover:text-primary",
       )}
       href={href}
     >

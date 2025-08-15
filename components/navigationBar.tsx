@@ -8,6 +8,7 @@ export function NavigationBar() {
         <NavLink href="/about">About</NavLink>
         <NavLink href="/expenses">Expenses</NavLink>
         <NavLink href="/create-expense">Create</NavLink>
+        <NavLink href="/profile">Profile</NavLink>
       </nav>
       <hr />
     </>
