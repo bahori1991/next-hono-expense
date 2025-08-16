@@ -19,6 +19,11 @@ export function useExpenses() {
       const { expenses } = await res.json();
       return expenses;
     },
+    select: (data) =>
+      data.map((expense) => ({
+        ...expense,
+        date: new Date(expense.date),
+      })),
   });
 
   return { expenses, isPending, isError, error };

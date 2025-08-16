@@ -15,6 +15,13 @@
       "when": 1755228086731,
       "tag": "0001_steady_wong",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1755322278040,
+      "tag": "0002_striped_raza",
+      "breakpoints": true
     }
   ]
 }

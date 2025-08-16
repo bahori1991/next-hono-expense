@@ -15,6 +15,7 @@ export const expenses = sqliteTable(
     userId: text("user_id").notNull(),
     title: text("title").notNull(),
     amount: numeric("amount", { mode: "number" }).notNull(),
+    date: integer("date", { mode: "timestamp" }).notNull(),
     createdAt: integer("created_at", { mode: "timestamp" })
       .$defaultFn(() => new Date())
       .notNull(),
@@ -32,6 +33,7 @@ export const insertExpenseSchema = createInsertSchema(expenses, {
   amount: z.coerce.number({ error: "Amount must be a number" }).gt(0, {
     error: "Amount must be greater than 0",
   }),
+  date: z.coerce.date({ error: "Please select a date from the calendar" }),
 });
 
 export const createExpenseSchema = insertExpenseSchema.omit({
@@ -42,4 +44,9 @@ export const createExpenseSchema = insertExpenseSchema.omit({
 
 export const selectExpenseSchema = createSelectSchema(expenses);
 
-export type Expense = z.infer<typeof insertExpenseSchema>;
+const expenseSchema = insertExpenseSchema.omit({
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type Expense = z.infer<typeof expenseSchema>;

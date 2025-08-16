@@ -1,17 +1,10 @@
 import { LogOutIcon } from "lucide-react";
-import { headers } from "next/headers";
 import { Button } from "@/components/ui/button";
-import { auth } from "@/lib/auth";
+import { logoutAction } from "@/features/auth/logout/actions/logoutAction";
 
 export function LogoutButton() {
   return (
-    <form
-      action={async () => {
-        await auth.api.signOut({
-          headers: await headers(),
-        });
-      }}
-    >
+    <form action={logoutAction}>
       <Button
         variant="outline"
         type="submit"
