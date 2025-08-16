@@ -18,6 +18,9 @@ export function ExpensesTableSkeleton() {
           <TableCell>
             <Skeleton className="h-4" />
           </TableCell>
+          <TableCell>
+            <Skeleton className="h-4" />
+          </TableCell>
         </TableRow>
       ))}
     </>

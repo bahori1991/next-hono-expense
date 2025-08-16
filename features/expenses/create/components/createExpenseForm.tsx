@@ -1,7 +1,9 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
+import { redirect } from "next/navigation";
 import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
 import { Form } from "@/components/form/Form";
 import { CalendarField } from "@/components/form/fields/CalendarField";
 import { NumberField } from "@/components/form/fields/NumberField";
@@ -20,11 +22,17 @@ export function CreateExpenseForm() {
   );
 
   useEffect(() => {
-    if (!isPending) {
+    if (lastResult?.status === "success") {
+      toast("A new expense has been created");
       queryClient.invalidateQueries({ queryKey: queryKeys.expenses.lists() });
       queryClient.invalidateQueries({ queryKey: queryKeys.expenses.total() });
+      redirect(lastResult.redirectTo ?? "/expenses");
+    } else if (lastResult?.status === "error") {
+      toast("Error", {
+        description: "Failed to create expense",
+      });
     }
-  }, [queryClient, isPending]);
+  }, [queryClient, lastResult]);
 
   return (
     <Form

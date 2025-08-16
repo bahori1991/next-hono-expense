@@ -37,6 +37,7 @@ export const insertExpenseSchema = createInsertSchema(expenses, {
 });
 
 export const createExpenseSchema = insertExpenseSchema.omit({
+  id: true,
   userId: true,
   createdAt: true,
   updatedAt: true,
@@ -44,7 +45,7 @@ export const createExpenseSchema = insertExpenseSchema.omit({
 
 export const selectExpenseSchema = createSelectSchema(expenses);
 
-const expenseSchema = insertExpenseSchema.omit({
+const expenseSchema = selectExpenseSchema.omit({
   createdAt: true,
   updatedAt: true,
 });

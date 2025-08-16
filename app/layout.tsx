@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "sonner";
 import TanstackProvider from "@/components/providers/TanstackProvider";
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
           {children}
           <ReactQueryDevtools />
         </TanstackProvider>
+        <Toaster position="bottom-right" />
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogoutButton } from "@/features/auth/logout/components/LogoutButton";
 import { useCurrentUser } from "@/features/auth/user/hooks/useCurrentUser";
 
@@ -13,7 +14,13 @@ export function CurrentUserUI() {
 
   return (
     <div className="flex flex-col gap-2">
-      <p>Hello, {user.name}</p>
+      <div className="flex items-center gap-2">
+        <Avatar>
+          <AvatarImage src={user.image ?? ""} alt={user.name} />
+          <AvatarFallback>{user.name.slice(0, 2).toUpperCase()}</AvatarFallback>
+        </Avatar>
+        <p>Hello, {user.name}</p>
+      </div>
       <LogoutButton />
     </div>
   );

@@ -26,6 +26,7 @@ export function ExpensesTable({
           <TableHead className="w-[150px]">Date</TableHead>
           <TableHead>Title</TableHead>
           <TableHead className="w-[100px]">Amount</TableHead>
+          <TableHead className="w-[100px]">Delete</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
